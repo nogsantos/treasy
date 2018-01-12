@@ -10,6 +10,7 @@ module.exports = (grunt) => {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON("package.json"),
@@ -17,10 +18,10 @@ module.exports = (grunt) => {
 		sass: {
 			dist: {
 				options: { // Target options
-					style: 'expanded'
+					style: 'compressed'
 				},
 				files: {
-					'<%=dist%>/css/main.min.css': [
+					'<%=dist%>/css/style.min.css': [
 						"src/css/main.scss"
 					]
 				}
@@ -35,15 +36,14 @@ module.exports = (grunt) => {
 					report: 'gzip'
 				},
 				files: {
-					'<%=dist%>/js/main.min.js': [
+					'<%=dist%>/js/app.bundle.js': [
 						'src/js/app/app.js',
-						'src/js/app/config.js',
-						'src/js/app/run.js',
 						'src/js/app/routes.js',
+						'src/js/app/run.js',
 						'src/js/providers/*.js',
-						'src/js/controllers/**/*.js',
+						'src/js/controllers/**/*-controller.js',
 					],
-					'<%=dist%>/js/libs.min.js': [
+					'<%=dist%>/js/libs.bundle.js': [
 						'bower_components/angular-ui-tree/dist/angular-ui-tree.min.js'
 					]
 				}
@@ -55,6 +55,7 @@ module.exports = (grunt) => {
 					'<%=dist%>/js/angular.min.js': [
 						'bower_components/angular/angular.min.js',
 						'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+						'bower_components/angular-sanitize/angular-sanitize.min.js',
 					],
 				},
 			},
@@ -68,7 +69,8 @@ module.exports = (grunt) => {
 				files: {
 					'<%=dist%>/index.html': 'src/views/template/index.html',
 					'<%=dist%>/header.html': 'src/views/template/header.html',
-					'<%=dist%>/footer.html': 'src/views/template/footer.html'
+					'<%=dist%>/footer.html': 'src/views/template/footer.html',
+					'<%=dist%>/home.html': 'src/views/home/index.html',
 				}
 			}
 		},
@@ -87,18 +89,7 @@ module.exports = (grunt) => {
 		},
 		copy: {
 			main: {
-				files: [{
-						expand: true,
-						cwd: 'src',
-						src: ['fonts/**'],
-						dest: '<%=dist%>/'
-					},
-					{
-						expand: true,
-						cwd: 'src',
-						src: ['img/**'],
-						dest: '<%=dist%>/'
-					},
+				files: [
 					{
 						src: ['./package.json'],
 						dest: '<%=dist%>/'
@@ -109,38 +100,47 @@ module.exports = (grunt) => {
 		watch: {
 			default: {
 				files: ['src/views/**/*.html', 'src/js/**/*', 'src/css/**/*'],
-				tasks: ['uglify', 'sass', 'htmlmin', 'cssmin', 'concat'],
+				tasks: ['clean:js', 'uglify', 'sass', 'htmlmin', 'cssmin', 'concat'],
 				options: {
 					spawn: false,
 				}
 			},
 			html: {
 				files: ['src/views/**/*.html'],
-				tasks: ['htmlmin'],
+				tasks: ['clean:html','htmlmin'],
 				options: {
 					spawn: false,
 				}
 			},
 			js: {
 				files: ['src/js/**/*'],
-				tasks: ['uglify', 'concat'],
+				tasks: ['clean:js','uglify', 'concat'],
 				options: {
 					spawn: false,
 				}
 			},
 			css: {
 				files: ['src/css/**/*'],
-				tasks: ['sass', 'cssmin'],
+				tasks: ['clean:css','sass', 'cssmin'],
 				options: {
 					spawn: false,
 				}
 			}
+		},
+		clean: {
+			build: {
+				src: ['<%=dist%>']
+			},
+			js: ['<%=dist%>/js/app.bundle.js'],
+			css: ['<%=dist%>/css/style.min.css'],
+			html: ['<%=dist%>/*.html'],
+
 		}
 	});
 	/*
 	 * Compilar todo o sistema: $ grunt
 	 */
-	grunt.registerTask('default', ['sass', 'uglify', 'htmlmin', 'cssmin', 'concat', 'copy', 'watch:default']);
+	grunt.registerTask('default', ['clean', 'sass', 'uglify', 'htmlmin', 'cssmin', 'concat', 'copy', 'watch:default']);
 	/*
 	 * Compilar apenas o html: $ grunt html
 	 */

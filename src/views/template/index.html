@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="pt-BR" ng-controller="mainController as ctrl">
+<html ng-app="app" lang="pt-BR">
 
 <head>
 	<meta charset="UTF-8">
@@ -7,21 +7,23 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=edge">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<meta name="author" content="Fabricio Nogueira dos Santos">
-	<title>Treasy</title>
-	<link rel="stylesheet" href="/css/main.min.css">
-	<script src="/js/angular.min.js"></script>
-	<script src="/js/libs.min.js"></script>
-	<script src="/js/main.min.js"></script>
+	<title ng-bind="$root.sysname + ' » ' + $root.page"></title>
+	<link rel="stylesheet" href="/css/layout.min.css">
+	<link rel="stylesheet" href="/css/style.min.css">
 </head>
 
-<body ng-cloak>
+<body>
 	<!-- menu -->
 	<section ng-include src="'header.html'"></section>
 	<section id="container">
-		<article ui-view ng-cloak></article>
+		<article ui-view></article>
 	</section>
 	<!-- rodape -->
 	<section ng-include src="'footer.html'"></section>
+
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/libs.bundle.js"></script>
+	<script src="/js/app.bundle.js"></script>
 </body>
 
 </html>

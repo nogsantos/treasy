@@ -1,12 +1,12 @@
+"use strict";
 /**
  * Configuração das rotas do sistema
  */
 (function () {
-	"use strict";
 
-	function App() {}
+	function Route() {}
 
-	App.prototype.routes = function (
+	Route.prototype.routes = function (
 		$stateProvider,
 		$urlRouterProvider,
 		$locationProvider
@@ -16,7 +16,7 @@
 		$stateProvider
 			.state('home', {
 				url: "/",
-				templateUrl: "index.html",
+				templateUrl: "home.html",
 				controller: "homeController",
 				controllerAs: "ctrl",
 				data: {
@@ -33,10 +33,9 @@
 			// 	}
 			// })
 			;
-			console.log('routes');
 	};
 	/**
 	 * Module
 	 */
-	angular.module('app').config(App.prototype.routes);
+	angular.module('app').config(Route.prototype.routes);
 }());

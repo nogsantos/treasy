@@ -6,8 +6,10 @@
  */
 (function () {
 	"use strict";
-
-	function AppRun(
+	/**
+	 * Module
+	 */
+	angular.module('app').run(function (
 		$rootScope,
 		$location,
 		config,
@@ -34,10 +36,5 @@
 		$rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
 			$state.go('erro');
 		});
-		console.log('run');
-	}
-	/**
-	 * Module
-	 */
-	angular.module('app').run(AppRun);
+	});
 }());
