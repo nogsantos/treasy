@@ -9,12 +9,13 @@ module.exports = (grunt) => {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-concurrent');
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON("package.json"),
-		dist: "dist/<%=pkg.name%>-v<%=pkg.version%>",
+		dist: "dist",
+		filepath: "",
 		sass: {
 			dist: {
 				options: { // Target options
@@ -42,9 +43,6 @@ module.exports = (grunt) => {
 						'src/js/app/run.js',
 						'src/js/providers/*.js',
 						'src/js/controllers/**/*-controller.js',
-					],
-					'<%=dist%>/js/libs.bundle.js': [
-						'bower_components/angular-ui-tree/dist/angular-ui-tree.min.js'
 					]
 				}
 			}
@@ -57,6 +55,9 @@ module.exports = (grunt) => {
 						'bower_components/angular-ui-router/release/angular-ui-router.min.js',
 						'bower_components/angular-sanitize/angular-sanitize.min.js',
 					],
+					'<%=dist%>/js/libs.bundle.js': [
+						'bower_components/angular-ui-tree/dist/angular-ui-tree.min.js'
+					]
 				},
 			},
 		},
@@ -70,7 +71,8 @@ module.exports = (grunt) => {
 					'<%=dist%>/index.html': 'src/views/template/index.html',
 					'<%=dist%>/header.html': 'src/views/template/header.html',
 					'<%=dist%>/footer.html': 'src/views/template/footer.html',
-					'<%=dist%>/home.html': 'src/views/home/index.html',
+					'<%=dist%>/home.html': 'src/views/home/home.html',
+					'<%=dist%>/error.html': 'src/views/error/error.html',
 				}
 			}
 		},
@@ -87,71 +89,56 @@ module.exports = (grunt) => {
 				}
 			}
 		},
-		copy: {
-			main: {
-				files: [
-					{
-						src: ['./package.json'],
-						dest: '<%=dist%>/'
-					},
-				],
-			},
-		},
 		watch: {
-			default: {
-				files: ['src/views/**/*.html', 'src/js/**/*', 'src/css/**/*'],
-				tasks: ['clean:js', 'uglify', 'sass', 'htmlmin', 'cssmin', 'concat'],
-				options: {
-					spawn: false,
-				}
-			},
-			html: {
-				files: ['src/views/**/*.html'],
-				tasks: ['clean:html','htmlmin'],
-				options: {
-					spawn: false,
-				}
-			},
-			js: {
-				files: ['src/js/**/*'],
-				tasks: ['clean:js','uglify', 'concat'],
-				options: {
-					spawn: false,
-				}
-			},
-			css: {
-				files: ['src/css/**/*'],
-				tasks: ['clean:css','sass', 'cssmin'],
-				options: {
-					spawn: false,
-				}
+			files: ['src/views/**/*.html', 'src/js/**/*', 'src/css/**/*'],
+			options: {
+				spawn: false
 			}
 		},
 		clean: {
 			build: {
 				src: ['<%=dist%>']
+			}
+		},
+		nodemon: {
+			dev: {
+				script: 'server.js'
+			}
+		},
+		concurrent: {
+			options: {
+				logConcurrentOutput: true
 			},
-			js: ['<%=dist%>/js/app.bundle.js'],
-			css: ['<%=dist%>/css/style.min.css'],
-			html: ['<%=dist%>/*.html'],
-
+			tasks: ['watch', 'nodemon']
+		}
+	});
+	/**
+	 * Atualizando apenas o que foi alterado
+	 */
+	grunt.event.on('watch', function (action, filepath) {
+		var filename = filepath.replace(/^.*[\\\/]/, '');
+		var dist_file = `<%=dist%>/${filename}`;
+		var addfile = {};
+		addfile[dist_file] = filepath;
+		var extension = filename.split('.').pop();
+		switch (extension) {
+			case 'html':
+				grunt.config('watch.tasks', ['clean', 'htmlmin']);
+				grunt.config('clean.build.src', dist_file);
+				grunt.config('htmlmin.dist.files', Object.assign(addfile));
+				break;
+			case 'js':
+				grunt.config('watch.tasks', ['clean', 'uglify']);
+				grunt.config('clean.build.src', `<%=dist%>/js/app.bundle.js`);
+				break;
+			case 'scss':
+				grunt.config('watch.tasks', ['clean', 'sass', 'cssmin']);
+				grunt.config('clean.build.src', `<%=dist%>/css/style.min.css`);
+				break;
 		}
 	});
 	/*
 	 * Compilar todo o sistema: $ grunt
 	 */
-	grunt.registerTask('default', ['clean', 'sass', 'uglify', 'htmlmin', 'cssmin', 'concat', 'copy', 'watch:default']);
-	/*
-	 * Compilar apenas o html: $ grunt html
-	 */
-	grunt.registerTask('html', ['htmlmin', 'watch:html']);
-	/*
-	 * Compilar apenas o css: $ grunt css
-	 */
-	grunt.registerTask('css', ['sass', 'cssmin', 'watch:css']);
-	/*
-	 *Compilar apenas o js: $ grunt js
-	 */
-	grunt.registerTask('js', ['uglify', 'watch:js']);
-
+	grunt.registerTask('default', ['clean', 'uglify', 'sass', 'htmlmin', 'cssmin', 'concat', 'concurrent']);
 };

@@ -3,15 +3,18 @@
  */
 (function () {
 	"use strict";
-
-	function Home() {}
-	Home.prototype.controller = function (
-		$scope
-	) {
+	angular.module('app').controller('homeController', function ($scope) {
+		/**
+		 * Delete
+		 * @param {*} scope
+		 */
 		$scope.remove = function (scope) {
 			scope.remove();
 		};
-
+		/**
+		 * Add
+		 * @param {*} scope
+		 */
 		$scope.newSubItem = function (scope) {
 			var nodeData = scope.$modelValue;
 			nodeData.nodes.push({
@@ -20,32 +23,37 @@
 				nodes: []
 			});
 		};
-
+		/**
+		 *
+		 * @param {*} item
+		 */
 		$scope.visible = function (item) {
 			return !($scope.query && $scope.query.length > 0 &&
-				item.title.indexOf($scope.query) == -1);
+				item.title.indexOf($scope.query) === -1);
 
 		};
-
-		$scope.findNodes = function () {
-
-		};
-
+		/**
+		 *
+		 */
+		$scope.findNodes = function () {};
+		/**
+		 * Dados
+		 */
 		$scope.data = [{
 			'id': 1,
 			'title': 'node1',
 			'nodes': [{
 					'id': 11,
-					'title': 'node1.1',
+					'title': 'node1.10',
 					'nodes': [{
 						'id': 111,
-						'title': 'node1.1.1',
+						'title': 'node1.1.111',
 						'nodes': []
 					}]
 				},
 				{
 					'id': 12,
-					'title': 'node1.2',
+					'title': 'node1.225',
 					'nodes': []
 				}
 			]
@@ -76,13 +84,9 @@
 			'title': 'node4',
 			'nodes': [{
 				'id': 41,
-				'title': 'node4.1',
+				'title': 'node4.1121',
 				'nodes': []
 			}]
 		}];
-	};
-	/**
-	 * Module
-	 */
-	angular.module('app').controller('homeController', Home.prototype.controller);
+	});
 }());
