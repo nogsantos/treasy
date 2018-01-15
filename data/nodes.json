@@ -2,29 +2,29 @@
 	"data": [
 		{
 			"id": 1,
-			"descricao": "Campos confecções",
+			"title": "Campos confecções",
 			"observacao": "Utilizado nas confecções do país",
 			"nodes": [
 				{
 					"id": 2,
-					"descricao": "Bermudas",
+					"title": "Bermudas",
 					"observacao": "pequenas, médias e grandes",
 					"nodes": []
 				},
 				{
 					"id": 3,
-					"descricao": "Calças",
+					"title": "Calças",
 					"observacao": "pequenas, médias e grandes",
 					"nodes": [
 						{
 							"id": 4,
-							"descricao": "Sarja (m)",
+							"title": "Sarja (m)",
 							"observacao": "Calças do tio sarja",
 							"nodes": []
 						},
 						{
 							"id": 5,
-							"descricao": "Social",
+							"title": "Social",
 							"observacao": "Calças do tio social",
 							"nodes": []
 						}
@@ -32,29 +32,29 @@
 				},
 				{
 					"id": 6,
-					"descricao": "Camisas",
+					"title": "Camisas",
 					"observacao": "De todos os tipos e cores",
 					"nodes": [
 						{
 							"id": 7,
-							"descricao": "Esporte",
+							"title": "Esporte",
 							"observacao": "Colorias",
 							"nodes": []
 						},
 						{
 							"id": 8,
-							"descricao": "Gola polo",
+							"title": "Gola polo",
 							"observacao": "Do tio social",
 							"nodes": []
 						},
 						{
 							"id": 9,
-							"descricao": "Grife",
+							"title": "Grife",
 							"observacao": "Algum modelo de grife",
 							"nodes": [
 								{
 									"id": 10,
-									"descricao": "Grife sub-item",
+									"title": "Grife sub-item",
 									"observacao": "Algum modelo de grife",
 									"nodes": []
 								}
@@ -62,7 +62,7 @@
 						},
 						{
 							"id": 11,
-							"descricao": "Social",
+							"title": "Social",
 							"observacao": "Sociais",
 							"nodes": []
 						}
@@ -70,7 +70,7 @@
 				},
 				{
 					"id": 12,
-					"descricao": "Terno",
+					"title": "Terno",
 					"observacao": "Ternos diversos",
 					"nodes": []
 				}

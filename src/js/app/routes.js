@@ -20,7 +20,7 @@
 			}
 		});
 		$stateProvider.state('form', {
-			url: "/form",
+			url: "/form/node?id",
 			templateUrl: "form.html",
 			controller: "formController",
 			controllerAs: "ctrl",
