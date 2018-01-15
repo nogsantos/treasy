@@ -34,6 +34,18 @@
 				});
 			};
 			/**
+			 * Fecha todos os nós
+			 */
+			$scope.collapseAll = function() {
+				$scope.$broadcast("angular-ui-tree:collapse-all");
+			};
+			/**
+			 * Expande todos os nós
+			 */
+			$scope.expandAll = function() {
+				$scope.$broadcast("angular-ui-tree:expand-all");
+			};
+			/**
 			 *
 			 * @param {*} item
 			 */
@@ -44,6 +56,9 @@
 					item.title.indexOf($scope.query) === -1
 				);
 			};
+			/**
+			 *
+			 */
 			$scope.add = function() {
 				$state.go("form");
 			};
@@ -56,12 +71,28 @@
 			 */
 			var query = function() {
 				var nodes = new NodeModel();
-				nodes.query().$promise.then(function(response) {
-					$scope.data = response.data.length > 0 ? response.data : [];
-				}).catch(function(err) {
-					console.error("warning", err);
-				});
+				nodes
+					.query()
+					.$promise.then(function(response) {
+						$scope.data =
+							response.data.length > 0 ? response.data : [];
+					})
+					.catch(function(err) {
+						console.error("warning", err);
+					});
 			};
+
+
+			//   $scope.toggle = function(scope) {
+			// 	scope.toggle();
+			//   };
+
+			//   $scope.moveLastToTheBeginning = function() {
+			// 	var a = $scope.data.pop();
+			// 	$scope.data.splice(0, 0, a);
+			//   };
+
+
 		}
 	]);
 })();

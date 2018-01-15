@@ -25,3 +25,11 @@ npm start
 ```
 
 Ao inicializar o ambiente para desenvolvimento, as alterações realizadas no código, após serem salvas, serão refletidas no endereço ```http://localhost:8080``` após a atualização da página. Um diretório ```dist``` é criado com o código para distribuição.
+
+### Arquivos para distribuição
+
+```shell
+npm run build
+```
+
+No diretório ```dist``` serão gerados os arquivos para deploy no servidor de produção.

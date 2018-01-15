@@ -28,7 +28,7 @@ ul {
 	&:not(.browser-default) {
 		padding-left: 0;
 		list-style-type: none;
-		&>li {
+		& > li {
 			list-style-type: none;
 		}
 	}
@@ -51,33 +51,40 @@ a {
 }
 
 .z-depth-1 {
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+		0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .z-depth-1-half {
-	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+		0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
 
 .z-depth-2 {
-	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+		0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
 .z-depth-3 {
-	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+		0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
 }
 
 .z-depth-4 {
-	box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
 
 .z-depth-5 {
-	box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+		0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
 .hoverable {
-	transition: box-shadow .25s;
+	transition: box-shadow 0.25s;
 	&:hover {
-		box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
+			0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 } // Dividers
 .divider {
@@ -122,7 +129,6 @@ i {
 	position: fixed !important;
 }
 
-
 /*********************
      Transition Classes
    **********************/
@@ -135,7 +141,6 @@ ul.staggered-list li {
 	opacity: 0;
 	transform-origin: 0 50%;
 }
-
 
 /*********************
      Media Query Classes
@@ -229,20 +234,20 @@ td {
 table {
 	width: 100%;
 	display: table;
-	&.bordered>thead>tr,
-	&.bordered>tbody>tr {
+	&.bordered > thead > tr,
+	&.bordered > tbody > tr {
 		border-bottom: 1px solid $table-border-color;
 	}
-	&.striped>tbody {
-		>tr:nth-child(odd) {
+	&.striped > tbody {
+		> tr:nth-child(odd) {
 			background-color: $table-striped-color;
 		}
-		>tr>td {
+		> tr > td {
 			border-radius: 0;
 		}
 	}
-	&.highlight>tbody>tr {
-		transition: background-color .25s ease;
+	&.highlight > tbody > tr {
+		transition: background-color 0.25s ease;
 		&:hover {
 			background-color: $table-striped-color;
 		}
@@ -275,7 +280,7 @@ th {
 		display: block;
 		position: relative;
 		td:empty:before {
-			content: '\00a0';
+			content: "\00a0";
 		}
 		th,
 		td {
@@ -359,8 +364,8 @@ th {
 			min-height: 84px;
 			padding-left: 72px;
 			position: relative; // Don't style circles inside preloader classes.
-			&:not(.circle-clipper)>.circle,
-			 :not(.circle-clipper)>.circle {
+			&:not(.circle-clipper) > .circle,
+			:not(.circle-clipper) > .circle {
 				position: absolute;
 				width: 42px;
 				height: 42px;
@@ -401,7 +406,7 @@ th {
 	}
 	a.collection-item {
 		display: block;
-		transition: .25s;
+		transition: 0.25s;
 		color: $collection-link-color;
 		&:not(.active) {
 			&:hover {
@@ -440,7 +445,7 @@ th {
 }
 
 .right-align {
-	text-align: right
+	text-align: right;
 }
 
 .center,
@@ -500,11 +505,11 @@ th {
 }
 
 .items-title {
-	background-color: color('blue-grey', 'darken-1');
+	background-color: color("blue-grey", "darken-1");
 	padding: 0.5rem;
 	font-weight: bold;
-	color: color('blue-grey', 'lighten-4');
-	&>span {
+	color: color("blue-grey", "lighten-4");
+	& > span {
 		float: right;
 		padding: 0.4rem;
 		font-size: 1.5rem;
@@ -537,68 +542,69 @@ th {
 }
 
 .btn {
-    margin-right: 8px;
+	margin-right: 8px;
 }
 
 .angular-ui-tree-handle {
-    background: #f8faff;
-    border: 1px solid #dae2ea;
-    color: #7c9eb2;
-    padding: 10px 10px;
+	background: #f8faff;
+	border: 1px solid #dae2ea;
+	color: #7c9eb2;
+	padding: 10px 10px;
 }
 
 .angular-ui-tree-handle:hover {
-    color: #438eb9;
-    background: #f4f6f7;
-    border-color: #dce2e8;
+	color: #438eb9;
+	background: #f4f6f7;
+	border-color: #dce2e8;
 }
 
 .angular-ui-tree-placeholder {
-    background: #f0f9ff;
-    border: 2px dashed #bed2db;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	background: #f0f9ff;
+	border: 2px dashed #bed2db;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 tr.angular-ui-tree-empty {
-    height:100px
+	height: 100px;
 }
 
 .group-title {
-    background-color: #687074 !important;
-    color: #FFF !important;
+	background-color: #687074 !important;
+	color: #fff !important;
 }
 
-
 /* --- Tree --- */
+
 .tree-node {
-    border: 1px solid #dae2ea;
-    background: #f8faff;
-    color: #7c9eb2;
+	border: 1px solid #dae2ea;
+	background: #f8faff;
+	color: #7c9eb2;
 }
 
 .nodrop {
-    background-color: #f2dede;
+	background-color: #f2dede;
 }
 
 .tree-node-content {
-    margin: 10px;
+	margin: 10px;
 }
+
 .tree-handle {
-    padding: 10px;
-    background: #428bca;
-    color: #FFF;
-    margin-right: 10px;
+	padding: 10px;
+	background: #428bca;
+	color: #fff;
+	margin-right: 10px;
 }
 
 .angular-ui-tree-handle:hover {
 }
 
 .angular-ui-tree-placeholder {
-    background: #f0f9ff;
-    border: 2px dashed #bed2db;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	background: #f0f9ff;
+	border: 2px dashed #bed2db;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }

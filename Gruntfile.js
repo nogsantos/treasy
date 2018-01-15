@@ -33,14 +33,16 @@ module.exports = grunt => {
 		"bower_components/angular/angular.min.js",
 		"bower_components/angular-ui-router/release/angular-ui-router.min.js",
 		"bower_components/angular-sanitize/angular-sanitize.min.js",
-		"bower_components/angular-resource/angular-resource.min.js"
+		"bower_components/angular-resource/angular-resource.min.js",
 	];
 	/**
 	 * Definições
 	 * Bundle libs
 	 */
 	var libs_bundle = [
-		"bower_components/angular-ui-tree/dist/angular-ui-tree.min.js"
+		"bower_components/angular-ui-tree/dist/angular-ui-tree.min.js",
+		'bower_components/angular-bootstrap/ui-bootstrap.min.js',
+		'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
 	];
 	/**
 	 * Objeto com as tasks
@@ -186,6 +188,30 @@ module.exports = grunt => {
 				{
 					expand: true,
 					flatten: true,
+					src: [
+						"bower_components/bootstrap-css/css/bootstrap-theme.min.css"
+					],
+					dest: "dist/css/"
+				},
+				{
+					expand: true,
+					flatten: true,
+					src: [
+						"bower_components/bootstrap-css/css/bootstrap.min.css"
+					],
+					dest: "dist/css/"
+				},
+				{
+					expand: true,
+					flatten: false,
+					src: [
+						"fonts/*"
+					],
+					dest: "dist/"
+				},
+				{
+					expand: true,
+					flatten: true,
 					src: ["./maps/*.map"],
 					dest: "dist/js/"
 				}
@@ -242,7 +268,7 @@ module.exports = grunt => {
 				grunt.config("clean.build.src", `dist/js/app.bundle.js`);
 				break;
 			case "scss":
-				grunt.config("watch.tasks", ["clean", "sass", "cssmin"]);
+				grunt.config("watch.tasks", ["clean", "sass"]);
 				grunt.config("clean.build.src", `dist/css/style.min.css`);
 				break;
 		}

@@ -10,12 +10,12 @@
 
 ## Requisitos funcionais
 
-1. [ ] Estrutura de arvore.
-	* [ ] Deve ser possível expandir e fechar cada um dos nós e também ter a opção de expandir e fechar todos ao mesmo tempo;
+1. [x] Estrutura de arvore.
+	* [x] Deve ser possível expandir e fechar cada um dos nós e também ter a opção de expandir e fechar todos ao mesmo tempo;
 2. [ ] Adicionar, editar, excluir os nós da arvore (CRUD).
 	* [ ] Ao excluir um nó todos os seus filhos devem ser removidos também;
 	* [ ] Ao cadastrar ou editar um nó devem ser solicitados os campos código, descrição e observação sendo que somente código e descrição são obrigatórios;
 	* [ ] Não deve ter limite de níveis e nós cadastrados;
 	* [ ] Na exibição da arvore deve mostrar somente a descrição dos nós e ao colocar o mouse sobre um nó deve exibir um tooltip com o código, a descrição e a observação do nó;
-3. [ ] Busca pela descrição do nó
-	* [ ] Ao filtrar a arvore devem ser exibidos somente os nós que contém o termo pesquisado e todos os seus pais para que ela mantenha a hierarquia;
+3. [x] Busca pela descrição do nó
+	* [x] Ao filtrar a arvore devem ser exibidos somente os nós que contém o termo pesquisado e todos os seus pais para que ela mantenha a hierarquia;
