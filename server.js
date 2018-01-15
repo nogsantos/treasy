@@ -1,9 +1,8 @@
 "use strict";
-var express = require('express');
-var app     = express();
-app.use(express.static(__dirname + '/dist'));
-app.get('/', function(req, res) {
-    res.sendFile('./dist/index.html');
+var { exec } = require("child_process");
+var server = exec(`./node_modules/.bin/serve ./dist/ -p 8080 -C -s`, error => {
+	if (error !== null) {
+		console.error("exec error: " + error);
+	}
 });
-app.listen(8080);
-console.log('The servers starts on http://localhost:8080');
+console.log(`The servers starts on http://127.0.0.1:8080 ${server.pid}`);

@@ -1,8 +1,8 @@
-"use strict";
-/**
- * Configuração das rotas do sistema
- */
 (function () {
+	"use strict";
+	/**
+	 * Configuração das rotas do sistema
+	 */
 	angular.module('app').config(function (
 		$stateProvider,
 		$urlRouterProvider,
@@ -14,6 +14,15 @@
 			url: "/",
 			templateUrl: "home.html",
 			controller: "homeController",
+			controllerAs: "ctrl",
+			data: {
+				requireLogin: false
+			}
+		});
+		$stateProvider.state('form', {
+			url: "/form",
+			templateUrl: "form.html",
+			controller: "formController",
 			controllerAs: "ctrl",
 			data: {
 				requireLogin: false

@@ -15,6 +15,7 @@ Após o clone do projeto: ```https://github.com/nogsantos/treasy```
 ```shell
 npm install
 ```
+
 As dependências do projeto serão instaladas, tanto as para desenvolvimento, pacotes npm, quanto para a view, pacotes providos pelo bower.
 
 ### Ambiente de desenvolvimento

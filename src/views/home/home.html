@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="nodes_renderer.html">
+<script type="text/ng-template" id="nodes_renderer.html" ng-init="init()">
 	<div ui-tree-handle class="tree-node tree-node-content">
 		<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
 			<span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}">
@@ -17,18 +17,12 @@
 		</li>
 	</ol>
 </script>
-
 <div class="row">
 	<div class="col-sm-12">
-		<h3>Tree nodes</h3>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-6">
-		<p>Busca nó:
+		<p>Busca:
 			<input ng-model="query" ng-change="findNodes()">
 		</p>
+		<p><button ng-click="add()">Adicionar nó</button></p>
 	</div>
 	<div class="col-sm-6">
 		<div ui-tree id="tree-root">
