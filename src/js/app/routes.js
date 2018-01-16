@@ -14,19 +14,12 @@
 			url: "/",
 			templateUrl: "home.html",
 			controller: "homeController",
-			controllerAs: "ctrl",
-			data: {
-				requireLogin: false
-			}
+			controllerAs: "$ctrl"
 		});
-		$stateProvider.state('form', {
-			url: "/form/node?id",
-			templateUrl: "form.html",
-			controller: "formController",
-			controllerAs: "ctrl",
-			data: {
-				requireLogin: false
-			}
+		$stateProvider.state('sobre', {
+			url: "/sobre",
+			templateUrl: "sobre.html",
+			controller: "sobreController"
 		});
 	});
 }());

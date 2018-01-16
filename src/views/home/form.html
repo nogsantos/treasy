@@ -1,9 +1,28 @@
-<div class="container" ng-init="init()">
-	<h1>{{title}}</h1>
-	<form>
-		<input type="text" name="descricao">
-		<textarea name="obsercacao" id="observacao" cols="30" rows="10"></textarea>
-		<button type="button" class="btn btn-primary">Cadastrar</button>
-		<button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+<script type="text/ng-template" id="myModalContent.html">
+	<form name="form" novalidate class="simple-form" autocomplete="off">
+		<div class="modal-header">
+			<h3 ng-if="$ctrl.node !== undefined" class="modal-title" id="modal-title">N&oacute; filho
+				<small>
+					<pre>Dados do n&oacute; Pai:<br>ID: <b>#{{ $ctrl.node.id }}</b> Descri&ccedil;&atilde;o: <b>{{$ctrl.node.title}}</b></pre>
+				</small>
+			</h3>
+			<h3 ng-if="$ctrl.node === undefined" class="modal-title" id="modal-title">N&oacute; pai</h3>
+		</div>
+		<div class="modal-body" id="modal-body">
+			<div class="form-group {{form.$submitted&&form.descricao.$error.required ? 'has-error' : ''}}">
+				<label for="descricao">Descri&ccedil;&atilde;o</label>
+				<input type="text" class="form-control" id="descricao" name="descricao" aria-describedby="descricao_help" placeholder="Informe uma descri&ccedil;&atilde;o para n&oacute;" ng-model="node.title" required>
+				<small ng-show="form.$submitted&&form.descricao.$error.required" class="form-text text-muted help-block">Campo obrigat&oacute;rio: Descri&ccedil;&atilde;o inv&aacute;lida</small>
+			</div>
+			<div class="form-group {{form.$submitted&&form.observacao.$error.required ? 'has-error' : ''}}">
+				<label for="observacao">Observa&ccedil;&atilde;o</label>
+				<textarea class="form-control" id="observacao" rows="3" name="observacao" ng-model="node.observacao" required></textarea>
+				<small ng-show="form.$submitted&&form.observacao.$error.required" class="form-text text-muted help-block">Campo obrigat&oacute;rio: Observa&ccedil;&atilde;o inv&aacute;lida</small>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<input type="submit" class="btn green lighten-1 white-text" ng-click="$ctrl.ok(form, node)" value="Save" />
+			<button class="btn grey lighten-4 blue-text" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+		</div>
 	</form>
-</div>
+</script>

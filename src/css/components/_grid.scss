@@ -1,6 +1,6 @@
 .container {
 	margin: 0 auto;
-	max-width: 1280px;
+	max-width: $large-screen;
 	width: 90%;
 }
 
@@ -55,6 +55,7 @@
 .row {
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 15px;
 	&:after {
 		content: "";
 		display: table;

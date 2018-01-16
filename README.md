@@ -16,7 +16,7 @@ Após o clone do projeto: ```https://github.com/nogsantos/treasy```
 npm install
 ```
 
-As dependências do projeto serão instaladas, tanto as para desenvolvimento, pacotes npm, quanto para a view, pacotes providos pelo bower.
+Todas as dependências do projeto devem ser instaladas.
 
 ### Ambiente de desenvolvimento
 
@@ -24,7 +24,7 @@ As dependências do projeto serão instaladas, tanto as para desenvolvimento, pa
 npm start
 ```
 
-Ao inicializar o ambiente para desenvolvimento, as alterações realizadas no código, após serem salvas, serão refletidas no endereço ```http://localhost:8080``` após a atualização da página. Um diretório ```dist``` é criado com o código para distribuição.
+Ao inicializar o ambiente para desenvolvimento, as alterações realizadas no código, após serem salvas, serão refletidas no endereço ```http://localhost:8080``` após o refresh da página. O diretório ```dist``` é criado com o código.
 
 ### Arquivos para distribuição
 

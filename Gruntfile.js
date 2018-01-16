@@ -23,7 +23,8 @@ module.exports = grunt => {
 		"src/js/providers/*.js",
 		"src/js/controllers/**/*-controller.js",
 		"src/js/models/**/*-model.js",
-		"src/js/resources/**/*-resource.js"
+		"src/js/resources/**/*-resource.js",
+		"src/js/components/**/*-component.js"
 	];
 	/**
 	 * Definições
@@ -126,7 +127,11 @@ module.exports = grunt => {
 				"dist/header.html": "src/views/template/header.html",
 				"dist/footer.html": "src/views/template/footer.html",
 				"dist/home.html": "src/views/home/home.html",
-				"dist/form.html": "src/views/home/form.html"
+				"dist/nodes.html": "src/views/home/nodes.html",
+				"dist/tooltip.html": "src/views/home/tooltip.html",
+				"dist/form.html": "src/views/home/form.html",
+				"dist/about-button.html": "src/views/home/about-button.html",
+				"dist/sobre.html": "src/views/sobre/sobre.html"
 			}
 		}
 	};
@@ -206,6 +211,14 @@ module.exports = grunt => {
 					flatten: false,
 					src: [
 						"fonts/*"
+					],
+					dest: "dist/"
+				},
+				{
+					expand: true,
+					flatten: false,
+					src: [
+						"img/*"
 					],
 					dest: "dist/"
 				},

@@ -1,65 +1,30 @@
 <div ng-init="init()">
-	<!-- Node template -->
+	<!-- Nodes template -->
 	<script type="text/ng-template" id="nodes_renderer.html">
-		<div ui-tree-handle class="tree-node tree-node-content" tooltip-placement="top-left" uib-tooltip-template="'myTooltipTemplate.html'" tooltip-class="customClass">
-			<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
-				<span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}">
-				</span>
-			</a>
-			<span>{{node.title}}</span>
-			<a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			<a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
-				<span class="glyphicon glyphicon-plus"></span>
-			</a>
-		</div>
-		<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-			<li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'" ng-show="visible(node)">
-			</li>
-		</ol>
+		<ng-include src="'nodes.html'"></ng-include>
 	</script>
 	<!-- tooltip template -->
-	<script type="text/ng-template" id="myTooltipTemplate.html">
-		<div>ID: <b>{{ node.id }}</b></div>
-		<div>Descri&ccedil;&atilde;o: <b>{{ node.title }}</b></div>
-		<div>Observa&ccedil;&atilde;o: <b>{{ node.observacao }}</b></div>
-	</script>
-
-
-	<script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-            <ul>
-                <li ng-repeat="item in $ctrl.items">
-                    <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ $ctrl.selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
+	<ng-include src="'tooltip.html'"></ng-include>
+	<!-- modal template -->
+	<ng-include src="'form.html'"></ng-include>
+	<!-- Ações -->
 	<div class="row">
 		<div class="col-sm-12">
-			<button type="button" class="btn btn-primary" ng-click="expandAll()">Expandir todos</button>
-			<button type="button" class="btn btn-primary" ng-click="collapseAll()">Fechar todos</button>
-			<button type="button" class="btn btn-primary" ng-click="newNode()">Cadastra nó pai</button>
+			<button type="button" class="btn blue lighten-1 white-text" ng-click="expandAll()">Expandir todos</button>
+			<button type="button" class="btn blue lighten-1 white-text" ng-click="collapseAll()">Fechar todos</button>
+			<button type="button" class="btn green lighten-1 white-text right" ng-click="openComponentModal(this)">Cadastra nó pai</button>
 		</div>
 	</div>
+	<!-- Filtro -->
 	<div class="row">
-		<div class="col-sm-6">
-			<p>
-				<input placeholder="Digite para filtrar" ng-model="query" ng-change="findNodes()">
-			</p>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Digite para filtrar" ng-model="query" aria-describedby="busca_help" ng-change="findNodes()">
+				<small id="busca_help" class="form-text text-muted">Para busca um nó, digite sua descrição</small>
+			</div>
 		</div>
 	</div>
-
+	<!-- Listagem -->
 	<div class="row">
 		<div class="col-sm-12">
 			<div ui-tree id="tree-root">
@@ -70,3 +35,5 @@
 		</div>
 	</div>
 </div>
+<!-- about button -->
+<ng-include src="'about-button.html'"></ng-include>

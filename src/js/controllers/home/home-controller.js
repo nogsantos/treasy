@@ -8,7 +8,8 @@
 		"$state",
 		"NodeModel",
 		"$uibModal",
-		function ($scope, $state, NodeModel, $uibModal) {
+		"$log",
+		function ($scope, $state, NodeModel, $uibModal, $log) {
 			/**
 			 * Inicialização do controller
 			 */
@@ -23,41 +24,6 @@
 				scope.remove();
 			};
 			/**
-			 * Cadastrar nó pai
-			 */
-			$scope.newNode = function(){
-				$state.go("form");
-			};
-			/**
-			 * Add
-			 * @param {*} scope
-			 */
-			$scope.newSubItem = function (scope) {
-				var nodeData = scope.$modelValue;
-				// console.log(scope);
-				// $state.go("form", nodeData);
-
-				$uibModal.open({
-					ariaLabelledBy: 'modal-title-top',
-					ariaDescribedBy: 'modal-body-top',
-					templateUrl: 'myModalContent.html',
-					size: 'sm',
-					controller: function($scope) {
-					  $scope.name = 'top';
-					}
-				  });
-
-				// nodeData.nodes.push({
-				// 	id: nodeData.id * 10 + nodeData.nodes.length,
-				// 	title: nodeData.title + "." + (nodeData.nodes.length + 1),
-				// 	nodes: []
-				// });
-			};
-
-			$scope.cancel = function () {
-				$uibModal.dismiss('cancel');
-			  };
-			/**
 			 * Fecha todos os nós
 			 */
 			$scope.collapseAll = function () {
@@ -70,11 +36,11 @@
 				$scope.$broadcast("angular-ui-tree:expand-all");
 			};
 			/**
-			 *
+			 * @todo
+			 * 
 			 * @param {*} item
 			 */
 			$scope.visible = function (item) {
-				// console.log(item);
 				return !(
 					$scope.query &&
 					$scope.query.length > 0 &&
@@ -82,36 +48,85 @@
 				);
 			};
 			/**
-			 *
-			 */
-			$scope.add = function () {
-				$state.go("form");
-			};
-			/**
-			 *
+			 * @todo
 			 */
 			$scope.findNodes = function () {};
 			/**
-			 * Dados
+			 * Carrega os dados iniciais
 			 */
 			var queryData = function () {
 				var nodes = new NodeModel();
 				nodes.query().$promise.then(function (response) {
 					$scope.data = response.data.length > 0 ? response.data : [];
 				}).catch(function (err) {
-					console.error("warning", err);
+					$log.error(err);
 				});
 			};
-			//   $scope.toggle = function(scope) {
-			// 	scope.toggle();
-			//   };
-
-			//   $scope.moveLastToTheBeginning = function() {
-			// 	var a = $scope.data.pop();
-			// 	$scope.data.splice(0, 0, a);
-			//   };
-
-
+			/**
+			 * Formulário para cadastro de novos nós
+			 *
+			 * @param {*} scope
+			 */
+			$scope.openComponentModal = function (scope) {
+				var nodeData = scope.$modelValue;
+				var modalInstance = $uibModal.open({
+					component: 'modalComponent',
+					resolve: {
+						node: function () {
+							return nodeData;
+						}
+					}
+				});
+				modalInstance.result.then(function (node) {
+					if (node.pai) {
+						addNoFilho(nodeData, node);
+					} else {
+						addNoPai(node);
+					}
+				}, function () {
+					$log.info('modal-component dismissed at: ' + new Date());
+				});
+			};
+			/**
+			 * Adiciona um nó pai
+			 *
+			 * @param {*} node
+			 */
+			var addNoPai = function (node) {
+				$scope.data.unshift({
+					id: Math.floor(Math.random() * 10000),
+					title: node.title,
+					observacao: node.observacao,
+					nodes: []
+				});
+			};
+			/**
+			 * Adiciona um nó filho
+			 *
+			 * @param {*} node
+			 */
+			var addNoFilho = function (pai, node) {
+				pai.nodes.unshift({
+					id: Math.floor(Math.random() * 10000),
+					title: node.title,
+					observacao: node.observacao,
+					nodes: []
+				});
+			};
+			/**
+			 * Link para a página sobre
+			 */
+			$scope.about = function () {
+				$state.go("sobre");
+			};
+			/**
+			 * Edição de um nó
+			 * 
+			 * @param {*} node
+			 */
+			$scope.nodeEdit = function (node) {
+				$log.info(node);
+			};
 		}
 	]);
 })();
