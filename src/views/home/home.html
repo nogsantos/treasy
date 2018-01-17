@@ -12,15 +12,15 @@
 		<div class="col-sm-12">
 			<button type="button" class="btn blue lighten-1 white-text" ng-click="expandAll()">Expandir todos</button>
 			<button type="button" class="btn blue lighten-1 white-text" ng-click="collapseAll()">Fechar todos</button>
-			<button type="button" class="btn green lighten-1 white-text right" ng-click="openComponentModal(this)">Cadastra nó pai</button>
+			<button type="button" class="btn green lighten-1 white-text right" ng-click="openComponentModal(this)">Cadastra n&oacute; pai</button>
 		</div>
 	</div>
 	<!-- Filtro -->
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Digite para filtrar" ng-model="query" aria-describedby="busca_help" ng-change="findNodes()">
-				<small id="busca_help" class="form-text text-muted">Para busca um nó, digite sua descrição</small>
+				<input type="text" class="form-control" placeholder="Digite para filtrar" ng-model="query" aria-describedby="busca_help" ng-change="findNodes(this)">
+				<small id="busca_help" class="form-text text-muted">Para busca um n&oacute;, digite sua descri&ccedil;&atilde;o</small>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
-<script type="text/ng-template" id="myTooltipTemplate.html">
-	<div>Identificador: <b>{{ node.id }}</b></div>
-	<div>Descri&ccedil;&atilde;o: <b>{{ node.title }}</b></div>
-	<div>Observa&ccedil;&atilde;o: <b>{{ node.observacao }}</b></div>
+<script type="text/ng-template" id="myPopoverTemplate.html">
+	<div style="min-width: 15rem; max-width: 15rem;">
+		<div><b>C&oacute;digo:</b> {{ node.id }}</div>
+		<div><b>Descri&ccedil;&atilde;o </b><br>{{ node.title }}</div>
+		<div><b>Observa&ccedil;&atilde;o </b><br>{{ node.observacao }}</div>
+	</div>
 </script>

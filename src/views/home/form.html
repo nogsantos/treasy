@@ -1,9 +1,14 @@
 <script type="text/ng-template" id="myModalContent.html">
 	<form name="form" novalidate class="simple-form" autocomplete="off">
 		<div class="modal-header">
-			<h3 ng-if="$ctrl.node !== undefined" class="modal-title" id="modal-title">N&oacute; filho
+			<h3 ng-if="$ctrl.node !== undefined && !$ctrl.node.edit" class="modal-title" id="modal-title">Cadastrar n&oacute; filho
 				<small>
 					<pre>Dados do n&oacute; Pai:<br>ID: <b>#{{ $ctrl.node.id }}</b> Descri&ccedil;&atilde;o: <b>{{$ctrl.node.title}}</b></pre>
+				</small>
+			</h3>
+			<h3 ng-if="$ctrl.node !== undefined && $ctrl.node.edit" class="modal-title" id="modal-title">Editar n&oacute;
+				<small>
+					<pre>Dados atuais do n&oacute;:<br>ID: <b>#{{ $ctrl.node.id }}</b> Descri&ccedil;&atilde;o: <b>{{$ctrl.node.title}}</b></pre>
 				</small>
 			</h3>
 			<h3 ng-if="$ctrl.node === undefined" class="modal-title" id="modal-title">N&oacute; pai</h3>

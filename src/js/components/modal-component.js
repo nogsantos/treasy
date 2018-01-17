@@ -27,8 +27,12 @@
 			$ctrl.ok = function (form, node) {
 				if (form.$valid) {
 					try {
-						node.pai = $ctrl.resolve.node.id;
-					} catch (error) { }
+						if ($ctrl.node.id && !$ctrl.node.edit) {
+							node.pai = $ctrl.resolve.node.id;
+						} else {
+							node.id = $ctrl.resolve.node.id;
+						}
+					} catch (error) {}
 					$ctrl.close({
 						$value: node
 					});

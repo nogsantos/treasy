@@ -1,15 +1,15 @@
-<div ui-tree-handle class="tree-node tree-node-content" tooltip-placement="top-left" uib-tooltip-template="'myTooltipTemplate.html'" tooltip-class="customClass">
+<div ui-tree-handle class="tree-node tree-node-content" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" popover-trigger="'mouseenter'">
 	<a class="btn grey lighten-5 black-text btn-xs" data-nodrag ng-click="toggle(this)">
 		<span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
 	</a>
 	<span>{{node.title}}</span>
-	<a class="pull-right btn red lighten-1 white-text btn-xs" uib-tooltip="Remover nó id: {{node.id}}" data-nodrag ng-click="remove(this)">
+	<a class="pull-right btn red lighten-1 white-text btn-xs" uib-tooltip="Remover nó id: {{node.id}}" data-nodrag ng-click="remove(this, false)">
 		<span class="glyphicon glyphicon-remove"></span>
 	</a>
-	<a class="pull-right btn green lighten-1 white-text btn-xs" uib-tooltip="Adicionar nó filho" data-nodrag ng-click="openComponentModal(this)">
+	<a class="pull-right btn green lighten-1 white-text btn-xs" uib-tooltip="Adicionar nó filho" data-nodrag ng-click="openComponentModal(this, false)">
 		<span class="glyphicon glyphicon-plus"></span>
 	</a>
-	<a class="pull-right btn blue lighten-1 white-text btn-xs" uib-tooltip="Editar nó id: {{node.id}}" data-nodrag ng-click="nodeEdit(this)">
+	<a class="pull-right btn blue lighten-1 white-text btn-xs" uib-tooltip="Editar nó id: {{node.id}}" data-nodrag ng-click="openComponentModal(this, true)">
 		<span class="glyphicon glyphicon-pencil"></span>
 	</a>
 </div>

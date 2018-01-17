@@ -6,12 +6,19 @@
 	angular.module("app").controller("sobreController", [
 		"$scope",
 		"$state",
-		function ($scope, $state) {
+		"$window",
+		function ($scope, $state, $window) {
 			/**
 			 * Inicialização do controller
 			 */
 			$scope.init = function () {
 				$scope.title = "Sobre";
+			};
+			/**
+			 * Retornar para o controle anterior
+			 */
+			$scope.back = function () {
+				$window.history.back();
 			};
 		}
 	]);

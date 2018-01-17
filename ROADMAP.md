@@ -14,7 +14,7 @@
 	* [x] Deve ser possível expandir e fechar cada um dos nós e também ter a opção de expandir e fechar todos ao mesmo tempo;
 2. [ ] Adicionar, editar, excluir os nós da arvore (CRUD).
 	* [x] Ao excluir um nó todos os seus filhos devem ser removidos também;
-	* [ ] Ao cadastrar ou editar um nó devem ser solicitados os campos código, descrição e observação sendo que somente código e descrição são obrigatórios;
+	* [x] Ao cadastrar ou editar um nó devem ser solicitados os campos código, descrição e observação sendo que somente código e descrição são obrigatórios;
 	* [x] Não deve ter limite de níveis e nós cadastrados;
 	* [x] Na exibição da arvore deve mostrar somente a descrição dos nós e ao colocar o mouse sobre um nó deve exibir um tooltip com o código, a descrição e a observação do nó;
 3. [x] Busca pela descrição do nó

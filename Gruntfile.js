@@ -20,7 +20,6 @@ module.exports = grunt => {
 		"src/js/app/app.js",
 		"src/js/app/routes.js",
 		"src/js/app/run.js",
-		"src/js/providers/*.js",
 		"src/js/controllers/**/*-controller.js",
 		"src/js/models/**/*-model.js",
 		"src/js/resources/**/*-resource.js",
@@ -131,6 +130,7 @@ module.exports = grunt => {
 				"dist/tooltip.html": "src/views/home/tooltip.html",
 				"dist/form.html": "src/views/home/form.html",
 				"dist/about-button.html": "src/views/home/about-button.html",
+				"dist/erro.html": "src/views/erro/erro.html",
 				"dist/sobre.html": "src/views/sobre/sobre.html"
 			}
 		}

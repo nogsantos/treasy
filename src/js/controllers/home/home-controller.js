@@ -11,6 +11,13 @@
 		"$log",
 		function ($scope, $state, NodeModel, $uibModal, $log) {
 			/**
+			 * Usando popover como tooltip
+			 */
+			$scope.dynamicPopover = {
+				templateUrl: 'myPopoverTemplate.html',
+				title: 'Dados do nó'
+			};
+			/**
 			 * Inicialização do controller
 			 */
 			$scope.init = function () {
@@ -36,21 +43,26 @@
 				$scope.$broadcast("angular-ui-tree:expand-all");
 			};
 			/**
-			 * @todo
-			 * 
+			 * Busca por nós (estático)
+			 *
+			 * @todo A biblioteca apresenta o resultado da busca somente
+			 * 		 até o segundo nível do nó. O correto seria a busca
+			 * 		 pelo termo em todos os níveis.
+			 *
 			 * @param {*} item
 			 */
 			$scope.visible = function (item) {
-				return !(
-					$scope.query &&
-					$scope.query.length > 0 &&
-					item.title.indexOf($scope.query) === -1
-				);
+				var descricao = item.title ? item.title.toLowerCase() : '';
+				var query = $scope.query ? $scope.query.toLowerCase() : '';
+				return !(query && query.length > 0 && descricao.indexOf(query) === -1);
 			};
 			/**
-			 * @todo
+			 * Pode realizar uma busca pelos nós, dinamicamente em um
+			 * recurso remoto...
 			 */
-			$scope.findNodes = function () {};
+			$scope.findNodes = function (e) {
+				$log.info(e.query);
+			};
 			/**
 			 * Carrega os dados iniciais
 			 */
@@ -67,8 +79,11 @@
 			 *
 			 * @param {*} scope
 			 */
-			$scope.openComponentModal = function (scope) {
+			$scope.openComponentModal = function (scope, edit) {
 				var nodeData = scope.$modelValue;
+				if (nodeData) {
+					nodeData.edit = edit;
+				}
 				var modalInstance = $uibModal.open({
 					component: 'modalComponent',
 					resolve: {
@@ -78,13 +93,15 @@
 					}
 				});
 				modalInstance.result.then(function (node) {
-					if (node.pai) {
+					if (node.pai && !edit) {
 						addNoFilho(nodeData, node);
+					} else if (edit) {
+						nodeEdit(node);
 					} else {
 						addNoPai(node);
 					}
 				}, function () {
-					$log.info('modal-component dismissed at: ' + new Date());
+					$log.info('Ação cancelada');
 				});
 			};
 			/**
@@ -121,11 +138,32 @@
 			};
 			/**
 			 * Edição de um nó
-			 * 
+			 *
 			 * @param {*} node
 			 */
-			$scope.nodeEdit = function (node) {
-				$log.info(node);
+			var nodeEdit = function (node) {
+				nodeEditAction(node);
+			};
+			/**
+			 * Busca recursiva para edição do nó
+			 *
+			 * @param {*} node_edited
+			 */
+			var nodeEditAction = function (node_edited) {
+				$scope.data.forEach(function (item) {
+					if (item.id === node_edited.id) {
+						item.title = node_edited.title;
+						item.observacao = node_edited.observacao;
+						return item;
+					} else {
+						var found = nodeEditAction(item.nodes, node_edited);
+						if (found && found.edit) {
+							found.title = node_edited.title;
+							found.observacao = node_edited.observacao;
+							return found;
+						}
+					}
+				});
 			};
 		}
 	]);

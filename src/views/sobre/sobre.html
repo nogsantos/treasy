@@ -1,8 +1,12 @@
 <div ng-init="init()">
-	<h1 class="page-header">{{title}}</h1>
+	<h1 class="page-header">
+		<span>{{title}}</span>
+		<a ng-click="back()" class="btn btn-lg green lighten-2 white-text right">Retornar para a listagem</a>
+	</h1>
 	<div class="row">
-		<div class="col-sm-12">
-			Sistema desenvolvido para...			
+		<div class="col-sm-12 shades white">
+			<p>Sistema desenvolvido para avalia&ccedil;&atilde;o t&eacute;cnica para a vaga de Software Engineer - Front-End da empresa <a target="_blank" href="https://www.treasy.com.br/">Treasy</a></p>
+
 		</div>
 	</div>
 </div>
