@@ -1,5 +1,5 @@
-<div ui-tree-handle class="tree-node tree-node-content" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" popover-trigger="'mouseenter'">
-	<a class="btn grey lighten-5 black-text btn-xs" data-nodrag ng-click="toggle(this)">
+<div ui-tree-handle class="tree-node tree-node-content" uib-popover-template="dynamicPopover.templateUrl"  popover-title="{{dynamicPopover.title}}" popover-trigger="'mouseenter'" popover-popup-delay="800">
+	<a class="btn transparent black-text btn-xs" data-nodrag ng-click="toggle(this)">
 		<span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
 	</a>
 	<span>{{node.title}}</span>
@@ -14,6 +14,6 @@
 	</a>
 </div>
 <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-	<li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'" ng-show="visible(node)">
+	<li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'" ng-hide="visible(node)">
 	</li>
 </ol>

@@ -8,6 +8,7 @@
 		"ui.router",
 		"ngSanitize",
 		"ui.tree",
+		"hc.marked",
 		"ui.bootstrap"
 	];
 	angular

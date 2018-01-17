@@ -12,7 +12,7 @@
 
 1. [x] Estrutura de arvore.
 	* [x] Deve ser possível expandir e fechar cada um dos nós e também ter a opção de expandir e fechar todos ao mesmo tempo;
-2. [ ] Adicionar, editar, excluir os nós da arvore (CRUD).
+2. [x] Adicionar, editar, excluir os nós da arvore (CRUD).
 	* [x] Ao excluir um nó todos os seus filhos devem ser removidos também;
 	* [x] Ao cadastrar ou editar um nó devem ser solicitados os campos código, descrição e observação sendo que somente código e descrição são obrigatórios;
 	* [x] Não deve ter limite de níveis e nós cadastrados;

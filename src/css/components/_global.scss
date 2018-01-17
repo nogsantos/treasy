@@ -551,7 +551,6 @@ th {
 	&:hover {
 		color: color('blue', 'darken-1');
 		background: color('grey', 'lighten-3');
-		;
 		border: 1px dashed color('grey', 'lighten-2');
 	}
 }
@@ -631,7 +630,6 @@ tr.angular-ui-tree-empty {
 			transform: rotate(10deg);
 		}
 	}
-
 	@media (max-width:500px) {
 		.github-corner:hover {
 			.octo-arm {
@@ -646,4 +644,34 @@ tr.angular-ui-tree-empty {
 		}
 		;
 	}
+}
+
+.page-header {
+	padding-bottom: 9px;
+	margin: 40px 0 20px;
+	border-bottom: 1px solid #eee;
+}
+
+.ng-isolate-scope {
+	h1 {
+		font-size: $h3-fontsize !important;
+		line-height: 110%;
+		margin: ($h3-fontsize / 2) 0 ($h3-fontsize / 2.5) 0;
+		@extend .page-header !optional;
+	}
+	h2 {
+		font-size: $h4-fontsize !important;
+		line-height: 110%;
+		margin: ($h4-fontsize / 2) 0 ($h4-fontsize / 2.5) 0;
+	}
+	h3 {
+		font-size: $h5-fontsize !important;
+		line-height: 110%;
+		margin: ($h5-fontsize / 2) 0 ($h5-fontsize / 2.5) 0;
+	}
+}
+
+.loader {
+	position: absolute;
+	left: 50%;
 }

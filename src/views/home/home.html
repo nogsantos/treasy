@@ -10,8 +10,8 @@
 	<!-- Ações -->
 	<div class="row">
 		<div class="col-sm-12">
-			<button type="button" class="btn blue lighten-1 white-text" ng-click="expandAll()">Expandir todos</button>
-			<button type="button" class="btn blue lighten-1 white-text" ng-click="collapseAll()">Fechar todos</button>
+			<button type="button" class="btn blue lighten-1 white-text" ng-click="nodeToggle()">{{toggle.title}} todos os nós</button>
+			<!-- <button type="button" class="btn blue lighten-1 white-text" ng-click="collapseAll()">Fechar todos os nós</button> -->
 			<button type="button" class="btn green lighten-1 white-text right" ng-click="openComponentModal(this)">Cadastra n&oacute; pai</button>
 		</div>
 	</div>
@@ -27,6 +27,7 @@
 	<!-- Listagem -->
 	<div class="row">
 		<div class="col-sm-12">
+			<img class="loader" ng-if="loading" src="img/ajax-loader.gif">
 			<div ui-tree id="tree-root">
 				<ol ui-tree-nodes ng-model="data">
 					<li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>

@@ -11,36 +11,51 @@
 		"$log",
 		function ($scope, $state, NodeModel, $uibModal, $log) {
 			/**
-			 * Usando popover como tooltip
-			 */
-			$scope.dynamicPopover = {
-				templateUrl: 'myPopoverTemplate.html',
-				title: 'Dados do nó'
-			};
-			/**
 			 * Inicialização do controller
 			 */
 			$scope.init = function () {
+				/**
+				 * Loading para a consulta
+				 */
+				$scope.loading = false;
+				/**
+				 * Realiza a consulta
+				 */
 				queryData();
+				/**
+				 * Evento toggle
+				 */
+				$scope.toggle = {
+					expanded: true,
+					title: 'Fechar'
+				};
+				/**
+				 * Usando popover como tooltip
+				 */
+				$scope.dynamicPopover = {
+					templateUrl: 'myPopoverTemplate.html',
+					title: 'Dados do nó'
+				};
 			};
 			/**
 			 * Delete
-			 * @param {*} scope
+			 * @param {*} scope Item a ser removido
 			 */
 			$scope.remove = function (scope) {
 				scope.remove();
 			};
 			/**
-			 * Fecha todos os nós
+			 * Toggle para abrir ou fechar todos os nós
 			 */
-			$scope.collapseAll = function () {
-				$scope.$broadcast("angular-ui-tree:collapse-all");
-			};
-			/**
-			 * Expande todos os nós
-			 */
-			$scope.expandAll = function () {
-				$scope.$broadcast("angular-ui-tree:expand-all");
+			$scope.nodeToggle = function () {
+				$scope.toggle.state = !$scope.toggle.state;
+				if ($scope.toggle.state) {
+					$scope.$broadcast("angular-ui-tree:collapse-all");
+					$scope.toggle.title = 'Expandir';
+				} else {
+					$scope.$broadcast("angular-ui-tree:expand-all");
+					$scope.toggle.title = 'Fechar';
+				}
 			};
 			/**
 			 * Busca por nós (estático)
@@ -49,35 +64,39 @@
 			 * 		 até o segundo nível do nó. O correto seria a busca
 			 * 		 pelo termo em todos os níveis.
 			 *
-			 * @param {*} item
+			 * @param {*} item Descrição
 			 */
 			$scope.visible = function (item) {
 				var descricao = item.title ? item.title.toLowerCase() : '';
 				var query = $scope.query ? $scope.query.toLowerCase() : '';
-				return !(query && query.length > 0 && descricao.indexOf(query) === -1);
+				return (query && query.length > 0 && descricao.indexOf(query) === -1);
 			};
 			/**
 			 * Pode realizar uma busca pelos nós, dinamicamente em um
 			 * recurso remoto...
 			 */
 			$scope.findNodes = function (e) {
-				$log.info(e.query);
+				// $log.info(e.query);
 			};
 			/**
 			 * Carrega os dados iniciais
 			 */
 			var queryData = function () {
 				var nodes = new NodeModel();
+				$scope.loading = true;
 				nodes.query().$promise.then(function (response) {
+					$scope.loading = false;
 					$scope.data = response.data.length > 0 ? response.data : [];
 				}).catch(function (err) {
+					$scope.loading = false;
 					$log.error(err);
 				});
 			};
 			/**
 			 * Formulário para cadastro de novos nós
 			 *
-			 * @param {*} scope
+			 * @param {*} scope Dados do nó
+			 * @param {*} edit Define edição
 			 */
 			$scope.openComponentModal = function (scope, edit) {
 				var nodeData = scope.$modelValue;
@@ -107,11 +126,11 @@
 			/**
 			 * Adiciona um nó pai
 			 *
-			 * @param {*} node
+			 * @param {*} node Dados do nó a ser adicionado
 			 */
 			var addNoPai = function (node) {
 				$scope.data.unshift({
-					id: Math.floor(Math.random() * 10000),
+					id: idGenerator(),
 					title: node.title,
 					observacao: node.observacao,
 					nodes: []
@@ -120,11 +139,12 @@
 			/**
 			 * Adiciona um nó filho
 			 *
-			 * @param {*} node
+			 * @param {*} pai Dados do nó pai
+			 * @param {*} node Dados do nó filho
 			 */
 			var addNoFilho = function (pai, node) {
 				pai.nodes.unshift({
-					id: Math.floor(Math.random() * 10000),
+					id: idGenerator(),
 					title: node.title,
 					observacao: node.observacao,
 					nodes: []
@@ -139,18 +159,21 @@
 			/**
 			 * Edição de um nó
 			 *
-			 * @param {*} node
+			 * @param {*} node dados para edição do array
 			 */
 			var nodeEdit = function (node) {
-				nodeEditAction(node);
+				if (typeof node === 'object' && Object.keys(node).length > 0) {
+					nodeEditAction($scope.data, node);
+				}
 			};
 			/**
 			 * Busca recursiva para edição do nó
 			 *
-			 * @param {*} node_edited
+			 * @param {*} data Array à ser editado
+			 * @param {*} node_edited Dados para edição do array
 			 */
-			var nodeEditAction = function (node_edited) {
-				$scope.data.forEach(function (item) {
+			var nodeEditAction = function (data, node_edited) {
+				data.forEach(function (item) {
 					if (item.id === node_edited.id) {
 						item.title = node_edited.title;
 						item.observacao = node_edited.observacao;
@@ -164,6 +187,12 @@
 						}
 					}
 				});
+			};
+			/**
+			 * Gerado de ids aleatórios
+			 */
+			var idGenerator = function () {
+				return Math.floor(Math.random() * 10000);
 			};
 		}
 	]);

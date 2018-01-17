@@ -43,6 +43,8 @@ module.exports = grunt => {
 		"bower_components/angular-ui-tree/dist/angular-ui-tree.min.js",
 		'bower_components/angular-bootstrap/ui-bootstrap.min.js',
 		'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+		'bower_components/marked/lib/marked.js',
+		'bower_components/angular-marked/dist/angular-marked.js',
 	];
 	/**
 	 * Objeto com as tasks
@@ -176,10 +178,18 @@ module.exports = grunt => {
 	 * Copia os arquivos para o diretório de distribuição
 	 */
 	task.copy = {
-		dev: {
+		main: {
 			files: [
 				{
 					src: ["./data/nodes.json"],
+					dest: "dist/"
+				},
+				{
+					expand: true,
+					flatten: true,
+					src: [
+						"img/favicon.ico"
+					],
 					dest: "dist/"
 				},
 				{
@@ -227,25 +237,21 @@ module.exports = grunt => {
 					flatten: true,
 					src: ["./maps/*.map"],
 					dest: "dist/js/"
-				}
-			]
-		},
-		prod: {
-			files: [
+				},
 				{
-					src: ["./data/nodes.json"],
+					expand: true,
+					flatten: true,
+					src: ["./README.md"],
 					dest: "dist/"
 				},
 				{
 					expand: true,
 					flatten: true,
-					src: [
-						"bower_components/angular-ui-tree/dist/angular-ui-tree.min.css"
-					],
-					dest: "dist/css/"
+					src: ["./ROADMAP.md"],
+					dest: "dist/"
 				}
 			]
-		}
+	  	}
 	};
 	/**
 	 * Inicializa as configurações
@@ -295,7 +301,7 @@ module.exports = grunt => {
 		"sass",
 		"htmlmin",
 		"concat",
-		"copy:dev",
+		"copy",
 		"concurrent"
 	]);
 	/**
@@ -307,6 +313,6 @@ module.exports = grunt => {
 		"sass",
 		"htmlmin",
 		"concat",
-		"copy:prod"
+		"copy"
 	]);
 };

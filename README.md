@@ -1,4 +1,6 @@
-# Treasy frontend proficiency test
+# Treasy avaliação técnica
+
+Sistema desenvolvido para avaliação técnica para a vaga de Software Engineer - Front-End na empresa [Treasy](https://www.treasy.com.br/)
 
 ## Setup
 
@@ -8,7 +10,7 @@
 >
 > A configuração e execução do projeto depende do ```node.js```, então, caso não o tenha, instale e/ou atualize o [Node.js](https://nodejs.org/en/) em sua máquina.
 
-Após o clone do projeto: ```https://github.com/nogsantos/treasy```
+Após o clone do projeto no [GitHub](https://github.com/nogsantos/treasy)
 
 ### Instalação das dependências
 
