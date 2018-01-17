@@ -28,6 +28,12 @@ npm start
 
 Ao inicializar o ambiente para desenvolvimento, as alterações realizadas no código, após serem salvas, serão refletidas no endereço ```http://localhost:8080``` após o refresh da página. O diretório ```dist``` é criado com o código.
 
+### E2E testes
+
+```shell
+npm run e2e
+```
+
 ### Arquivos para distribuição
 
 ```shell
