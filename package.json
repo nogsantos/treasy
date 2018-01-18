@@ -8,7 +8,7 @@
     "start": "grunt",
     "build": "grunt prod",
     "e2e": "node e2e.js",
-    "postinstall": "./node_modules/.bin/bower install"
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/webdriver-manager update && npm run build"
   },
   "devDependencies": {
     "bower": "^1.8.2",
